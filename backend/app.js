@@ -10,6 +10,7 @@ app.use(cors());
 const swaggerJsDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 const generalRoute = require('./server/route/generalRoute');
+const utilityRoute = require('./server/route/utilityRoute');
 
 const allConfig = require('./config');
 const env = require('./common/utils/env.js');
@@ -40,7 +41,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs, { explorer: t
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
-app.use('/', generalRoute);
+app.use('/', generalRoute, utilityRoute);
 
 app.listen(port, () => {
   console.log(`${environment} Server listening on port ${port}`);
