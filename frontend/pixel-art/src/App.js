@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
-import './App.css';
+import Layout from './components/Layout/Layout';
+import BoardBuilder from './containers/BoardBuilder/BoardBuilder';
+import { Route, Switch } from 'react-router-dom';
 
 class App extends Component {
-  render() {
+  render () {
     return (
-      <div className="App">
-        <h1>Hi I am Glenn</h1>
+      <div>
+       <Layout>
+         <Switch>
+            <Route path="/" component={BoardBuilder} />
+         </Switch>
+       </Layout>
       </div>
     );
   }

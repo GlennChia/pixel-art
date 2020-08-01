@@ -3,13 +3,35 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { BrowserRouter } from 'react-router-dom';
+import axios from 'axios';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+axios.defaults.baseURL = 'http://127.0.0.1:80/';
+axios.defaults.headers.common['Authorization'] = 'AUTH TOKEN';
+axios.defaults.headers.post['Content-Type'] = 'application/json';
+
+axios.interceptors.request.use(request => {
+  console.log(request)
+  return request;
+}, error => {
+  return Promise.reject(error);
+});
+
+axios.interceptors.response.use(response => {
+  return response;
+}, error => {
+  return Promise.reject(error);
+});
+
+const app = (
+  <BrowserRouter>
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  </BrowserRouter>
 );
+
+ReactDOM.render( app,  document.getElementById('root') );
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
