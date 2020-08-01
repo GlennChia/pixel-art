@@ -1,0 +1,61 @@
+.BuildControls {
+    width: 100px;
+    height: 100%;
+    text-align: center;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.resetButton {
+    background-color: #6c757d;
+    outline: none;
+    cursor: pointer;
+    font-family: inherit;
+    color: #FFFFFF;
+    text-align: center;
+    width: 95%;
+    font-size: 1.2em;
+    padding: 10px;
+}
+
+.resetButton:hover, .resetButton:active {
+    background-color: #5A6268;
+    color: #FFFFFF;
+    /* text-shadow: 0 0 .9px #333, 0 0 .9px #333, 0 0 .9px #333;  */
+}
+
+.shuffleButton {
+    background-color: #007bff;
+    outline: none;
+    cursor: pointer;
+    font-family: inherit;
+    text-align: center;
+    color: #FFFFFF;
+    width: 95%;
+    font-size: 1.2em;
+    padding: 10px;
+}
+
+.shuffleButton:hover, .shuffleButton:active {
+    background-color: #0069D9;
+    color: #FFFFFF;
+    /* text-shadow: 0 0 .9px #FFFFFF, 0 0 .9px #FFFFFF, 0 0 .9px #FFFFFF;  */
+}
+
+.randomButton {
+    background-color: #dc3545;
+    outline: none;
+    cursor: pointer;
+    font-family: inherit;
+    text-align: center;
+    color: #FFFFFF;
+    width: 95%;
+    font-size: 1.2em;
+    padding: 10px;
+}
+
+.randomButton:hover, .randomButton:active {
+    background-color: #C82333;
+    color: #FFFFFF;
+    /* text-shadow: 0 0 .9px #FFFFFF, 0 0 .9px #FFFFFF, 0 0 .9px #FFFFFF;  */
+}
