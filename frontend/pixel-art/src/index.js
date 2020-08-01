@@ -6,7 +6,15 @@ import * as serviceWorker from './serviceWorker';
 import { BrowserRouter } from 'react-router-dom';
 import axios from 'axios';
 
-axios.defaults.baseURL = 'http://127.0.0.1:80/';
+const url = {
+  'DEV': process.env.REACT_APP_BACKEND_DEV,
+  'PROD': process.env.REACT_APP_BACKEND_PROD,
+  'DOCKER': process.env.REACT_APP_BACKEND_DOCKER,
+}
+
+let baseURL = url[process.env.REACT_APP_ENVIRONMENT];
+
+axios.defaults.baseURL = `http://${baseURL}/`;
 axios.defaults.headers.common['Authorization'] = 'AUTH TOKEN';
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 
