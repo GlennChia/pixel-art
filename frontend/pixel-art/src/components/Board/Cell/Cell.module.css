@@ -1,0 +1,16 @@
+.Cell {
+  display: table-cell;
+  background: #fff;
+  border: 1px solid #999;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.Cell:hover {
+  border: 2px solid #004187;
+}
+
+.Cell:active {
+  border: 2px solid #f85552;
+}

@@ -1,0 +1,9 @@
+.BoardRow {
+  clear: both;
+  content: "";
+  display: flex;
+}
+
+.Board {
+  width: 100%;
+}
