@@ -5,7 +5,7 @@ import Board from '../../components/Board/Board';
 import BuildControls from '../../components/Board/BuildControls/BuildControls';
 import axios from 'axios';
 import Spinner from '../../components/UI/Spinner/Spinner';
-
+import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 
 const DEFAULTCOLOR = '#F6F8FA';
 const COLORRANGE = [ '#FF9AA2', '#FFB7B2', '#FFDAC1', '#E2F0CB', '#B5EAD7', '#C7CEEA' ];
@@ -29,6 +29,8 @@ class BoardBuilder extends Component {
         axios.get('/utility/shuffle/')
             .then(response => {
                 this.setState({color: response.data, loading: !this.state.loading})
+        }).catch(error => {
+            this.setState({loading: false});
         });
     }
 
@@ -81,4 +83,4 @@ class BoardBuilder extends Component {
     }
 }
 
-export default BoardBuilder;
+export default withErrorHandler(BoardBuilder, axios);
