@@ -3,9 +3,11 @@ import Aux from '../../hoc/Auxiliary';
 import classes from './BoardBuilder.module.css';
 import Board from '../../components/Board/Board';
 import BuildControls from '../../components/Board/BuildControls/BuildControls';
+import SizeControls from '../../components/Board/SizeControls/SizeControls';
 import axios from 'axios';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
+import sizeHelpers from '../../helpers/sizeHelpers';
 
 const DEFAULTCOLOR = '#F6F8FA';
 const COLORRANGE = [ '#FF9AA2', '#FFB7B2', '#FFDAC1', '#E2F0CB', '#B5EAD7', '#C7CEEA' ];
@@ -65,6 +67,59 @@ class BoardBuilder extends Component {
         this.setState({color: randomBoard});
     }
 
+    sizeHandler = (type) => {
+        let updatedBoard;
+        switch (type) {
+            case ('expandTopLeft'):
+                updatedBoard = sizeHelpers.addUniformRow(this.state.color, DEFAULTCOLOR, 'top');
+                updatedBoard = sizeHelpers.addUniformColumn(updatedBoard, DEFAULTCOLOR, 'left');
+                break;
+            case ('expandTopRight'):
+                updatedBoard = sizeHelpers.addUniformRow(this.state.color, DEFAULTCOLOR, 'top');
+                updatedBoard = sizeHelpers.addUniformColumn(updatedBoard, DEFAULTCOLOR, 'right');
+                break;
+            case ('expandBotRight'):
+                updatedBoard = sizeHelpers.addUniformRow(this.state.color, DEFAULTCOLOR, 'bottom');
+                updatedBoard = sizeHelpers.addUniformColumn(updatedBoard, DEFAULTCOLOR, 'right');
+                break;
+            case ('expandBotLeft'):
+                updatedBoard = sizeHelpers.addUniformRow(this.state.color, DEFAULTCOLOR, 'bottom');
+                updatedBoard = sizeHelpers.addUniformColumn(updatedBoard, DEFAULTCOLOR, 'left');
+                break;
+            case ('expandAll'):
+                updatedBoard = sizeHelpers.addUniformRow(this.state.color, DEFAULTCOLOR, 'top');
+                updatedBoard = sizeHelpers.addUniformRow(updatedBoard, DEFAULTCOLOR, 'bottom');
+                updatedBoard = sizeHelpers.addUniformColumn(updatedBoard, DEFAULTCOLOR, 'left');
+                updatedBoard = sizeHelpers.addUniformColumn(updatedBoard, DEFAULTCOLOR, 'right');
+                break;
+            case ('shrinkTopLeft'):
+                updatedBoard = sizeHelpers.removeUniformRow(this.state.color, 'top');
+                updatedBoard = sizeHelpers.removeUniformColumn(updatedBoard, 'left');
+                break;
+            case ('shrinkTopRight'):
+                updatedBoard = sizeHelpers.removeUniformRow(this.state.color, 'top');
+                updatedBoard = sizeHelpers.removeUniformColumn(updatedBoard, 'right');
+                break;
+            case ('shrinkBotRight'):
+                updatedBoard = sizeHelpers.removeUniformRow(this.state.color, 'bottom');
+                updatedBoard = sizeHelpers.removeUniformColumn(updatedBoard, 'right');
+                break;
+            case ('shrinkBotLeft'):
+                updatedBoard = sizeHelpers.removeUniformRow(this.state.color, 'bottom');
+                updatedBoard = sizeHelpers.removeUniformColumn(updatedBoard, 'left');
+                break;
+            case ('shrinkAll'):
+                updatedBoard = sizeHelpers.removeUniformRow(this.state.color, 'top');
+                updatedBoard = sizeHelpers.removeUniformRow(updatedBoard, 'bottom');
+                updatedBoard = sizeHelpers.removeUniformColumn(updatedBoard, 'left');
+                updatedBoard = sizeHelpers.removeUniformColumn(updatedBoard, 'right');
+                break;
+            default:
+                console.log('invalid placement');
+        }
+        this.setState({color: updatedBoard});
+    }
+
     render () {
         const WIDTH = 600;
         const HEIGHT = 500;
@@ -85,7 +140,10 @@ class BoardBuilder extends Component {
                         shufflePattern={this.shufflePatternHandler}
                         resetPattern={this.resetPatternHandler}
                         randomPattern={this.randomPatternHandler}/>
+                    <div>
                         {displayBoard}
+                        <SizeControls sizeChange={this.sizeHandler}/>
+                    </div>
                 </div>
             </Aux>
         );
