@@ -1,0 +1,7 @@
+.SizeControls {
+    width: 500px;
+    display: flex;
+    align-items: 'center';
+    box-sizing: border-box;
+    cursor: pointer;
+}

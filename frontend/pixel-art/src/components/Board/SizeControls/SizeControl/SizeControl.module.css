@@ -1,0 +1,17 @@
+.Button {
+    background-color: #F6F8FA;
+    border-color: white;
+    border-radius: 7px;
+    /* border: none; */
+    width: 10%;
+    cursor: pointer;
+    padding: 0px;
+}
+
+.Image {
+    outline: none;
+    cursor: pointer;
+    width: 100%;
+    font-size: 1.2em;
+    padding: 0px;
+}
