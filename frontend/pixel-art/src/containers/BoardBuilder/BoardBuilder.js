@@ -27,7 +27,7 @@ const DEFAULTBOARD = constructDefaultBoard(3);
 class BoardBuilder extends Component {
 
     state = {
-        color: DEFAULTBOARD,
+        board: DEFAULTBOARD,
         loading: false
     }
     
@@ -39,14 +39,14 @@ class BoardBuilder extends Component {
         this.setState({loading: !this.state.loading});
         axios.get('/utility/shuffle/')
             .then(response => {
-                this.setState({color: response.data, loading: !this.state.loading})
+                this.setState({board: response.data, loading: !this.state.loading})
         }).catch(error => {
             this.setState({loading: false});
         });
     }
 
     resetPatternHandler = () => {
-        this.setState({color: DEFAULTBOARD});
+        this.setState({board: DEFAULTBOARD});
     }
 
     randomPatternHandler = () => {
@@ -64,52 +64,52 @@ class BoardBuilder extends Component {
             randomBoard[i] = randomRow;
         }
 
-        this.setState({color: randomBoard});
+        this.setState({board: randomBoard});
     }
 
     sizeHandler = (type) => {
         let updatedBoard;
         switch (type) {
             case ('expandTopLeft'):
-                updatedBoard = sizeHelpers.addUniformRow(this.state.color, DEFAULTCOLOR, 'top');
+                updatedBoard = sizeHelpers.addUniformRow(this.state.board, DEFAULTCOLOR, 'top');
                 updatedBoard = sizeHelpers.addUniformColumn(updatedBoard, DEFAULTCOLOR, 'left');
                 break;
             case ('expandTopRight'):
-                updatedBoard = sizeHelpers.addUniformRow(this.state.color, DEFAULTCOLOR, 'top');
+                updatedBoard = sizeHelpers.addUniformRow(this.state.board, DEFAULTCOLOR, 'top');
                 updatedBoard = sizeHelpers.addUniformColumn(updatedBoard, DEFAULTCOLOR, 'right');
                 break;
             case ('expandBotRight'):
-                updatedBoard = sizeHelpers.addUniformRow(this.state.color, DEFAULTCOLOR, 'bottom');
+                updatedBoard = sizeHelpers.addUniformRow(this.state.board, DEFAULTCOLOR, 'bottom');
                 updatedBoard = sizeHelpers.addUniformColumn(updatedBoard, DEFAULTCOLOR, 'right');
                 break;
             case ('expandBotLeft'):
-                updatedBoard = sizeHelpers.addUniformRow(this.state.color, DEFAULTCOLOR, 'bottom');
+                updatedBoard = sizeHelpers.addUniformRow(this.state.board, DEFAULTCOLOR, 'bottom');
                 updatedBoard = sizeHelpers.addUniformColumn(updatedBoard, DEFAULTCOLOR, 'left');
                 break;
             case ('expandAll'):
-                updatedBoard = sizeHelpers.addUniformRow(this.state.color, DEFAULTCOLOR, 'top');
+                updatedBoard = sizeHelpers.addUniformRow(this.state.board, DEFAULTCOLOR, 'top');
                 updatedBoard = sizeHelpers.addUniformRow(updatedBoard, DEFAULTCOLOR, 'bottom');
                 updatedBoard = sizeHelpers.addUniformColumn(updatedBoard, DEFAULTCOLOR, 'left');
                 updatedBoard = sizeHelpers.addUniformColumn(updatedBoard, DEFAULTCOLOR, 'right');
                 break;
             case ('shrinkTopLeft'):
-                updatedBoard = sizeHelpers.removeUniformRow(this.state.color, 'top');
+                updatedBoard = sizeHelpers.removeUniformRow(this.state.board, 'top');
                 updatedBoard = sizeHelpers.removeUniformColumn(updatedBoard, 'left');
                 break;
             case ('shrinkTopRight'):
-                updatedBoard = sizeHelpers.removeUniformRow(this.state.color, 'top');
+                updatedBoard = sizeHelpers.removeUniformRow(this.state.board, 'top');
                 updatedBoard = sizeHelpers.removeUniformColumn(updatedBoard, 'right');
                 break;
             case ('shrinkBotRight'):
-                updatedBoard = sizeHelpers.removeUniformRow(this.state.color, 'bottom');
+                updatedBoard = sizeHelpers.removeUniformRow(this.state.board, 'bottom');
                 updatedBoard = sizeHelpers.removeUniformColumn(updatedBoard, 'right');
                 break;
             case ('shrinkBotLeft'):
-                updatedBoard = sizeHelpers.removeUniformRow(this.state.color, 'bottom');
+                updatedBoard = sizeHelpers.removeUniformRow(this.state.board, 'bottom');
                 updatedBoard = sizeHelpers.removeUniformColumn(updatedBoard, 'left');
                 break;
             case ('shrinkAll'):
-                updatedBoard = sizeHelpers.removeUniformRow(this.state.color, 'top');
+                updatedBoard = sizeHelpers.removeUniformRow(this.state.board, 'top');
                 updatedBoard = sizeHelpers.removeUniformRow(updatedBoard, 'bottom');
                 updatedBoard = sizeHelpers.removeUniformColumn(updatedBoard, 'left');
                 updatedBoard = sizeHelpers.removeUniformColumn(updatedBoard, 'right');
@@ -117,23 +117,23 @@ class BoardBuilder extends Component {
             default:
                 console.log('invalid placement');
         }
-        this.setState({color: updatedBoard});
+        this.setState({board: updatedBoard});
     }
 
     render () {
         const WIDTH = 600;
         const HEIGHT = 500;
         let disableShrink = false;
-        let boxDimensions =  HEIGHT/this.state.color[0].length;
+        let boxDimensions =  HEIGHT/this.state.board[0].length;
 
-        disableShrink = this.state.color.length === 1;
+        disableShrink = this.state.board.length === 1;
 
         let displayBoard = null;
 
         if (this.state.loading) {
             displayBoard = <Spinner />;
         } else {
-            displayBoard = <Board color={this.state.color} boxDimensions={boxDimensions} height={HEIGHT}/>;
+            displayBoard = <Board board={this.state.board} boxDimensions={boxDimensions} height={HEIGHT}/>;
         }
 
         return (
