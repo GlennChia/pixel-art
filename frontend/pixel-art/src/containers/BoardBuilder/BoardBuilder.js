@@ -123,7 +123,10 @@ class BoardBuilder extends Component {
     render () {
         const WIDTH = 600;
         const HEIGHT = 500;
+        let disableShrink = false;
         let boxDimensions =  HEIGHT/this.state.color[0].length;
+
+        disableShrink = this.state.color.length === 1;
 
         let displayBoard = null;
 
@@ -142,7 +145,7 @@ class BoardBuilder extends Component {
                         randomPattern={this.randomPatternHandler}/>
                     <div>
                         {displayBoard}
-                        <SizeControls sizeChange={this.sizeHandler}/>
+                        <SizeControls sizeChange={this.sizeHandler} disableShrink={disableShrink}/>
                     </div>
                 </div>
             </Aux>

@@ -33,6 +33,7 @@ const sizeControls = (props) => (
                 alt={ctrl.type}
                 image={ctrl.image}
                 sizeChange={() => props.sizeChange(ctrl.label)}
+                disabled={props.disableShrink && ctrl.label.includes('shrink')}
             />
         ))}
     </div>
