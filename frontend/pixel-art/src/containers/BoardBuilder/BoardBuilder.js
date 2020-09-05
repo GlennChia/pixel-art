@@ -9,6 +9,7 @@ import Spinner from '../../components/UI/Spinner/Spinner';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import sizeHelpers from '../../helpers/sizeHelpers';
 import SketchPickerCustom from '../../components/Board/SketchPickerCustom/SketchPickerCustom';
+import ColorControls from '../../components/Board/ColorControls/ColorControls';
 
 const DEFAULTCOLOR = '#F6F8FA';
 const COLORRANGE = [ '#FF9AA2', '#FFB7B2', '#FFDAC1', '#E2F0CB', '#B5EAD7', '#C7CEEA' ];
@@ -31,6 +32,7 @@ class BoardBuilder extends Component {
         board: DEFAULTBOARD,
         loading: false,
         selectedColor: '#FFFFFF',
+        colorPallete: COLORRANGE
     }
     
     generateRandomNumber(min, max)  {
@@ -155,6 +157,7 @@ class BoardBuilder extends Component {
                     </div>
                     <div style={{width: '200px'}}>
                         <SketchPickerCustom handleChangeComplete={this.handleChangeComplete} selectedColor={this.state.selectedColor}/>
+                        <ColorControls pastelRange={this.state.colorPallete} />
                     </div>
                 </div>
             </Aux>

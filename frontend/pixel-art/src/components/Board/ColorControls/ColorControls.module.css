@@ -1,0 +1,39 @@
+.ColorControls {
+    width: 100%;
+    background-color: #ffffff;
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px, rgba(0, 0, 0, 0.15) 0px 8px 16px;
+    padding: 10px 10px 20px;
+    box-sizing: initial;
+    margin-top: 2px 
+}
+
+.Text{
+    margin-top: 1px;
+    margin-bottom: 8px;
+}
+
+.Cells {
+    display: flex;
+}
+
+.Cell {
+    width: 16px;
+    height: 16px;
+    margin-right:8px;
+    border-radius: 2px;
+    border-color: lightgrey;
+}
+
+.Add {
+    width: 16px;
+    height: 16px;
+    padding: none;
+    background: white;
+    color: #5A6268;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7em;
+    border: none;
+}
